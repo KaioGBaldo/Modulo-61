@@ -1,26 +1,11 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ titulo }}</title>
-</head>
-<body>
-
-    <h1>{{ titulo }}</h1>
-
-    <ul>
-        {% for produto in produtos %}
-            <li>
-                {{ produto.nome }} - R$ {{ produto.preco }}
-
-                {% if produto.disponivel %}
-                    <strong>(Disponível)</strong>
-                {% else %}
-                    <strong>(Indisponível)</strong>
-                {% endif %}
-            </li>
-        {% endfor %}
-    </ul>
-
-</body>
-</html>
+<h1>Blog da Loja</h1>
+<ul>
+    {% for post in posts %}
+        <li>
+            <a href="{% url 'detalhe_post' post.slug %}">{{ post.titulo }}</a> 
+            por {{ post.autor }}
+        </li>
+    {% empty %}
+        <li>Nenhum post publicado ainda.</li>
+    {% endfor %}
+</ul>
