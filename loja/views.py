@@ -1,15 +1,12 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_ some_shortcut_here
+from .models import Post
 
-def lista_produtos(request):
-    produtos = [
-        {'nome': 'Notebook', 'preco': 3500, 'disponivel': True},
-        {'nome': 'Mouse', 'preco': 150, 'disponivel': True},
-        {'nome': 'Teclado', 'preco': 250, 'disponivel': False},
-    ]
+# View para a lista de posts
+def lista_posts(request):
+    posts = Post.objects.filter(status='publicado') # Pega só os publicados
+    return render(request, 'loja/lista_posts.html', {'posts': posts})
 
-    contexto = {
-        'produtos': produtos,
-        'titulo': 'Lista de Produtos'
-    }
-
-    return render(request, 'lista_produtos.html', contexto)
+# View para o detalhe do post
+def detalhe_post(request, slug):
+    post = get_object_or_404(Post, slug=slug)
+    return render(request, 'loja/detalhe_post.html', {'post': post})
