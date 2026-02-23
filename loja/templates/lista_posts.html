@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Posts</title>
+</head>
+<body>
+    <h1>Blog do Kaio</h1>
+
+    {% for post in posts %}
+        <div class="post">
+            <h2>{{ post.titulo }}</h2>
+            
+            {% if post.descricao %}
+                <p>{{ post.descricao }}</p>
+            {% else %}
+                <p>Post sem descrição disponível.</p>
+            {% endif %}
+
+            <a href="{% url 'detalhe_post' post.slug %}">Ver detalhes</a>
+        </div>
+        <hr>
+    {% empty %}
+        <p>Nenhum post encontrado.</p>
+    {% endfor %}
+</body>
+</html>
