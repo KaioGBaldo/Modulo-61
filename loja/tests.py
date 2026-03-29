@@ -2,19 +2,20 @@ import pytest
 import factory
 from loja.models import Product
 
-# Fábrica para criar objetos de teste sem repetir código
+# Cria uma fábrica de produtos para os testes
 class ProductFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Product
 
-    title = 'Produto Teste'
-    description = 'Uma descrição qualquer'
-    price = 10.00
+    title = 'Produto Padrão'
+    description = 'Descrição do produto de teste'
+    price = 50.00
     active = True
 
 @pytest.mark.django_db
 def test_create_product():
-    # Cria uma instância no banco de teste usando a factory
-    product = ProductFactory(title="Camiseta EBAC")
-    assert product.title == "Camiseta EBAC"
+    # Cria um produto real no banco de dados de teste
+    product = ProductFactory(title="Teclado Mecânico")
+    
+    assert product.title == "Teclado Mecânico"
     assert Product.objects.count() == 1
